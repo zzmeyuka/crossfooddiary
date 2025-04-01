@@ -30,7 +30,7 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Developed by [Team Member Names] in the scope of the course '
+              'Developed by Rakhmetova Uldana, Syzdykova Malika in the scope of the course '
                   '“Crossplatform Development” at Astana IT University.\n\n'
                   'Mentor (Teacher): Assistant Professor Abzal Kyzyrkanov',
               style: TextStyle(fontSize: 16),
