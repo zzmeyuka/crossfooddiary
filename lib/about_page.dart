@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatelessWidget {
+  const AboutPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('About'),
+        title: const Text('About'),
         backgroundColor: Colors.teal,
       ),
-      body: Padding(
+      body: const Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,8 +21,7 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Food Diary is a mobile app that helps users track what they eat throughout the day. '
-                  'It promotes mindful eating and supports a healthy lifestyle by providing an easy way to monitor nutrition habits.',
+              'This app helps you track your meals and nutrition daily.',
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 20),
@@ -30,9 +31,9 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              'Developed by Rakhmetova Uldana, Syzdykova Malika in the scope of the course '
-                  '“Crossplatform Development” at Astana IT University.\n\n'
-                  'Mentor (Teacher): Assistant Professor Abzal Kyzyrkanov',
+              'Developed by Rakhmetova Uldana, Syzdykova Malika\n'
+                  'Crossplatform Development – Astana IT University\n'
+                  'Mentor: Assistant Professor Abzal Kyzyrkanov',
               style: TextStyle(fontSize: 16),
             ),
           ],
