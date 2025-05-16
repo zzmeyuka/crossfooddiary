@@ -1,0 +1,36 @@
+{
+  "@@locale": "en",
+  "about": "About",
+  "appTitle": "Food Diary",
+  "credits": "Credits",
+  "darkMode": "Dark Mode",
+  "developers": "Developed by Rakhmetova Uldana, Syzdykova Malika in the scope of the course \"Crossplatform Development\" at Astana IT University.\n\nMentor (Teacher): Assistant Professor Abzal Kyzyrkanov",
+  "english": "English",
+  "foodDiaryApp": "Food Diary App",
+  "foodDiaryDescription": "Food Diary is a mobile app that helps users track what they eat throughout the day. It promotes mindful eating and supports a healthy lifestyle by providing an easy way to monitor nutrition habits.",
+  "kazakh": "Kazakh",
+  "language": "Language",
+  "russian": "Russian",
+  "settings": "Settings",
+  "addMeal": "Add Meal",
+  "mealName": "Meal Name",
+  "kcal": "Kcal",
+  "pickTime": "Pick Time",
+  "pickImage": "Pick Image",
+  "fillFieldsError": "⚠ Please fill out all fields",
+  "save": "Save",
+  "greeting": "Hi, Malika & Dana 👋",
+  "home": "Home",
+  "todaysMeals": "Today's Meals",
+  "noMealsToday": "No meals today",
+  "email": "Email",
+  "password": "Password",
+  "login": "Login",
+  "noAccount": "Don't have an account? Register",
+  "register": "Register",
+  "registrationFailed": "Registration failed"
+}
+
+
+
+

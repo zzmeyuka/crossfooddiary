@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "681645922454",
+    "project_id": "food-diary-app-c6bf0",
+    "storage_bucket": "food-diary-app-c6bf0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681645922454:android:e4e2cd69109b4e626f8ab7",
+        "android_client_info": {
+          "package_name": "com.example.fooddiary"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATP085JSDYqDihUPZtbA7Ho2oMRqjaKqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681645922454:android:18acf948b14833de6f8ab7",
+        "android_client_info": {
+          "package_name": "com.example.fooddiaryapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATP085JSDYqDihUPZtbA7Ho2oMRqjaKqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -63,7 +63,8 @@ import 'app_localizations_ru.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,7 +72,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<
+      AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,7 +85,8 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <
+      LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -124,7 +127,7 @@ abstract class AppLocalizations {
   /// No description provided for @developers.
   ///
   /// In en, this message translates to:
-  /// **'Developed by Rakhmetova Uldana, Syzdykova Malika in the scope of the course “Crossplatform Development” at Astana IT University.\n\nMentor (Teacher): Assistant Professor Abzal Kyzyrkanov'**
+  /// **'Developed by Rakhmetova Uldana, Syzdykova Malika in the scope of the course \"Crossplatform Development\" at Astana IT University.\n\nMentor (Teacher): Assistant Professor Abzal Kyzyrkanov'**
   String get developers;
 
   /// No description provided for @english.
@@ -163,6 +166,66 @@ abstract class AppLocalizations {
   /// **'Russian'**
   String get russian;
 
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @addMeal.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Meal'**
+  String get addMeal;
+
+  /// No description provided for @mealName.
+  ///
+  /// In en, this message translates to:
+  /// **'Meal Name'**
+  String get mealName;
+
+  /// No description provided for @kcal.
+  ///
+  /// In en, this message translates to:
+  /// **'Kcal'**
+  String get kcal;
+
+  /// No description provided for @pickTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick Time'**
+  String get pickTime;
+
+  /// No description provided for @pickImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick Image'**
+  String get pickImage;
+
+  /// No description provided for @fillFieldsError.
+  ///
+  /// In en, this message translates to:
+  /// **'⚠ Please fill out all fields'**
+  String get fillFieldsError;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @greeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi, Malika & Dana 👋'**
+  String get greeting;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
   /// No description provided for @todaysMeals.
   ///
   /// In en, this message translates to:
@@ -175,11 +238,11 @@ abstract class AppLocalizations {
   /// **'No meals today'**
   String get noMealsToday;
 
-  /// No description provided for @settings.
-  ///
-  /// In en, this message translates to:
-  /// **'Settings'**
-  String get settings;
+  String get email;
+  String get password;
+  String get login;
+  String get noAccount;
+
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

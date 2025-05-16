@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../about_page.dart';
+import 'about_page.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<Map<String, dynamic>> meals = [

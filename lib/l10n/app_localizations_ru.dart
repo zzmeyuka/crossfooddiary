@@ -9,19 +9,19 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
-  String get about => 'О Приложении';
+  String get about => 'О приложении';
 
   @override
-  String get appTitle => 'Дневник Питания';
+  String get appTitle => 'Дневник питания';
 
   @override
   String get credits => 'Авторы';
 
   @override
-  String get darkMode => 'Тёмная Тема';
+  String get darkMode => 'Тёмная тема';
 
   @override
-  String get developers => 'Разработано Рахметовой Ульданой и Сыздыковой Маликой в рамках курса \"Кроссплатформенная разработка\" в Astana IT University.\n\nПреподаватель: Ассистент-профессор Абзал Кызырканов';
+  String get developers => 'Разработано Рахметовой Улданой и Сыздыковой Маликой в рамках курса \"Кроссплатформенная разработка\" в Astana IT University.\n\nПреподаватель: Ассистент-профессор Абзал Кызырканов';
 
   @override
   String get english => 'Английский';
@@ -30,7 +30,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get foodDiaryApp => 'Приложение Дневник Питания';
 
   @override
-  String get foodDiaryDescription => 'Приложение помогает пользователям отслеживать, что они едят в течение дня. Оно способствует осознанному питанию и поддержке здорового образа жизни.';
+  String get foodDiaryDescription => 'Приложение помогает пользователям отслеживать, что они едят в течение дня. Оно способствует осознанному питанию и поддержанию здорового образа жизни.';
 
   @override
   String get kazakh => 'Казахский';
@@ -42,11 +42,52 @@ class AppLocalizationsRu extends AppLocalizations {
   String get russian => 'Русский';
 
   @override
-  String get todaysMeals => 'Приёмы пищи сегодня';
-
-  @override
-  String get noMealsToday => 'Сегодня приёмов пищи не было';
-
-  @override
   String get settings => 'Настройки';
+
+  @override
+  String get addMeal => 'Добавить блюдо';
+
+  @override
+  String get mealName => 'Название блюда';
+
+  @override
+  String get kcal => 'Калории';
+
+  @override
+  String get pickTime => 'Выбрать время';
+
+  @override
+  String get pickImage => 'Выбрать изображение';
+
+  @override
+  String get fillFieldsError => '⚠ Пожалуйста, заполните все поля';
+
+  @override
+  String get save => 'Сохранить';
+
+  @override
+  String get greeting => 'Привет, Малика и Дана 👋';
+
+  @override
+  String get home => 'Главная';
+
+  @override
+  String get todaysMeals => 'Блюда на сегодня';
+
+  @override
+  String get noMealsToday => 'Сегодня нет блюд';
+  @override
+  String get login => 'Войти';
+
+  @override
+  String get noAccount => 'Нет аккаунта?';
+
+  @override
+  // TODO: implement email
+  String get email => throw UnimplementedError();
+
+  @override
+  // TODO: implement password
+  String get password => throw UnimplementedError();
+
 }

@@ -1,12 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'theme_provider.dart';
-import 'screens/calendar_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+import 'auth_provider.dart';
+import 'firebase_options.dart';
+import 'theme_provider.dart';
+import 'locale_provider.dart';
+import 'l10n/app_localizations.dart';
+import 'screens/calendar_screen.dart';
+import 'screens/settings_page.dart';
+import 'screens/about_page.dart';
+import 'screens/login_screen.dart';
+import 'screens/register_screen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
       child: const FoodDiaryApp(),
     ),
   );
@@ -18,13 +37,18 @@ class FoodDiaryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final localeProvider = Provider.of<LocaleProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Food Diary',
       themeMode: themeProvider.themeMode,
+      locale: localeProvider.locale,
+      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: ThemeData(
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: Colors.pinkAccent,
           secondary: Colors.purpleAccent,
           background: Color(0xFFFFF0F6),
@@ -43,7 +67,7 @@ class FoodDiaryApp extends StatelessWidget {
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
-        colorScheme: ColorScheme.dark(
+        colorScheme: const ColorScheme.dark(
           primary: Colors.deepPurple,
           secondary: Colors.pinkAccent,
           background: Color(0xFF1E1B2E),
@@ -60,7 +84,16 @@ class FoodDiaryApp extends StatelessWidget {
           bodyMedium: TextStyle(color: Colors.white70),
         ),
       ),
-      home: const CalendarScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => authProvider.isGuest || !authProvider.isLoggedIn
+            ? const LoginScreen()
+            : const CalendarScreen(),
+        '/settings': (context) => const SettingsPage(),
+        '/about': (context) => const AboutPage(),
+        '/calendar': (context) => const CalendarScreen(),
+        '/register': (context) => const RegisterScreen(),
+      },
     );
   }
 }
