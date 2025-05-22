@@ -14,6 +14,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   String? errorMessage;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,16 +37,28 @@ class _LoginScreenState extends State<LoginScreen> {
               obscureText: true,
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
+            isLoading
+                ? const CircularProgressIndicator()
+                : ElevatedButton(
               onPressed: () async {
+                setState(() {
+                  isLoading = true;
+                  errorMessage = null;
+                });
                 try {
                   await authProvider.signInWithEmail(
                     emailController.text.trim(),
                     passwordController.text.trim(),
                   );
+                  if (!mounted) return;
+                  Navigator.pushReplacementNamed(context, '/calendar');
                 } catch (e) {
                   setState(() {
                     errorMessage = e.toString();
+                  });
+                } finally {
+                  setState(() {
+                    isLoading = false;
                   });
                 }
               },
@@ -62,6 +75,13 @@ class _LoginScreenState extends State<LoginScreen> {
             TextButton(
               onPressed: () => Navigator.pushNamed(context, '/register'),
               child: Text(t.noAccount),
+            ),
+            TextButton(
+              onPressed: () {
+                authProvider.loginAsGuest();
+                Navigator.pushReplacementNamed(context, '/calendar');
+              },
+              child: const Text("Continue as Guest"),
             ),
           ],
         ),

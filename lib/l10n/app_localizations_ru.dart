@@ -66,7 +66,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get save => 'Сохранить';
 
   @override
-  String get greeting => 'Привет, Малика и Дана 👋';
+  String get greeting => 'Привет, Гость 👋';
 
   @override
   String get home => 'Главная';
@@ -76,18 +76,91 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noMealsToday => 'Сегодня нет блюд';
+
+  @override
+  String get email => 'Эл. почта';
+
+  @override
+  String get password => 'Пароль';
+
   @override
   String get login => 'Войти';
 
   @override
-  String get noAccount => 'Нет аккаунта?';
+  String get noAccount => 'Нет аккаунта? Зарегистрируйтесь';
 
   @override
-  // TODO: implement email
-  String get email => throw UnimplementedError();
+  String get register => 'Регистрация';
 
   @override
-  // TODO: implement password
-  String get password => throw UnimplementedError();
+  String get registrationFailed => 'Не удалось зарегистрироваться';
 
+  @override
+  String get confirmPassword => 'Подтвердите пароль';
+
+  @override
+  String get name => 'Имя';
+
+  @override
+  String get kcalGoal => 'Цель по калориям';
+
+  @override
+  String get profile => 'Профиль';
+
+  @override
+  String get edit => 'Редактировать';
+
+  @override
+  String get logout => 'Выйти';
+
+  @override
+  String get saveChanges => 'Сохранить изменения';
+
+  @override
+  String get changesSaved => 'Изменения успешно сохранены';
+
+  @override
+  String get invalidEmailOrPassword => 'Неверный email или пароль';
+
+  @override
+  String get loginAsGuest => 'Продолжить как гость';
+
+  @override
+  String get guestMode => 'Гостевой режим';
+
+  @override
+  String get editProfile => 'Редактировать профиль';
+
+  @override
+  String get theme => 'Тема';
+
+  @override
+  String get featureOnlyForRegistered => 'Эта функция доступна только для зарегистрированных пользователей';
+
+  @override
+  String get featureRestricted => 'Эта функция доступна только для зарегистрированных пользователей. Пожалуйста, войдите в систему.';
+
+  @override
+  String get invalidEmail => 'Пожалуйста, введите действительный адрес электронной почты';
+
+  @override
+  String get shortPassword => 'Пароль должен содержать не менее 6 символов';
+
+  @override
+  String get passwordsDoNotMatch => 'Пароли не совпадают';
+
+  @override
+  String get enterName => 'Пожалуйста, введите ваше имя';
+
+  @override
+  String get passwordMismatch => 'Пароли не совпадают';
+
+  @override
+  String get nameRequired => 'Пожалуйста, введите имя';
+
+  @override
+  String get continueAsGuest => 'Продолжить как гость';
+
+  @override
+  String get welcomeGuest => 'Добро пожаловать! Вы в гостевом режиме. Некоторые функции недоступны.';
 }

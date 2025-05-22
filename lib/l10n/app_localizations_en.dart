@@ -66,7 +66,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'Save';
 
   @override
-  String get greeting => 'Hi, Malika & Dana 👋';
+  String get greeting => 'Hi, Guest 👋';
 
   @override
   String get home => 'Home';
@@ -76,18 +76,91 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noMealsToday => 'No meals today';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get password => 'Password';
+
   @override
   String get login => 'Login';
 
   @override
-  String get noAccount => 'Don\'t have an account?';
+  String get noAccount => 'Don\'t have an account? Register';
 
   @override
-  // TODO: implement email
-  String get email => throw UnimplementedError();
+  String get register => 'Register';
 
   @override
-  // TODO: implement password
-  String get password => throw UnimplementedError();
+  String get registrationFailed => 'Registration failed';
 
+  @override
+  String get confirmPassword => 'Confirm Password';
+
+  @override
+  String get name => 'Name';
+
+  @override
+  String get kcalGoal => 'Kcal Goal';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get changesSaved => 'Changes saved successfully';
+
+  @override
+  String get invalidEmailOrPassword => 'Invalid email or password';
+
+  @override
+  String get loginAsGuest => 'Continue as guest';
+
+  @override
+  String get guestMode => 'Guest Mode';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get theme => 'Theme';
+
+  @override
+  String get featureOnlyForRegistered => 'This feature is available only for registered users';
+
+  @override
+  String get featureRestricted => 'This feature is only available for registered users. Please log in to continue.';
+
+  @override
+  String get invalidEmail => 'Please enter a valid email address';
+
+  @override
+  String get shortPassword => 'Password must be at least 6 characters';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get enterName => 'Please enter your name';
+
+  @override
+  String get passwordMismatch => 'Passwords do not match';
+
+  @override
+  String get nameRequired => 'Please enter your name';
+
+  @override
+  String get continueAsGuest => 'Continue as Guest';
+
+  @override
+  String get welcomeGuest => 'Welcome! You are in guest mode. Some features are restricted.';
 }

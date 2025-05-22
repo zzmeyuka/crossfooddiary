@@ -19,7 +19,7 @@
   "pickImage": "Pick Image",
   "fillFieldsError": "⚠ Please fill out all fields",
   "save": "Save",
-  "greeting": "Hi, Malika & Dana 👋",
+  "greeting": "Hi, Guest 👋",
   "home": "Home",
   "todaysMeals": "Today's Meals",
   "noMealsToday": "No meals today",
@@ -28,9 +28,29 @@
   "login": "Login",
   "noAccount": "Don't have an account? Register",
   "register": "Register",
-  "registrationFailed": "Registration failed"
+  "registrationFailed": "Registration failed",
+
+  "confirmPassword": "Confirm Password",
+  "name": "Name",
+  "kcalGoal": "Kcal Goal",
+  "profile": "Profile",
+  "edit": "Edit",
+  "logout": "Logout",
+  "saveChanges": "Save Changes",
+  "changesSaved": "Changes saved successfully",
+  "invalidEmailOrPassword": "Invalid email or password",
+  "loginAsGuest": "Continue as guest",
+  "guestMode": "Guest Mode",
+  "editProfile": "Edit Profile",
+  "theme": "Theme",
+  "featureOnlyForRegistered": "This feature is available only for registered users",
+  "featureRestricted": "This feature is only available for registered users. Please log in to continue.",
+  "invalidEmail": "Please enter a valid email address",
+  "shortPassword": "Password must be at least 6 characters",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "enterName": "Please enter your name",
+  "passwordMismatch": "Passwords do not match",
+  "nameRequired": "Please enter your name",
+  "continueAsGuest": "Continue as Guest",
+  "welcomeGuest": "Welcome! You are in guest mode. Some features are restricted."
 }
-
-
-
-
