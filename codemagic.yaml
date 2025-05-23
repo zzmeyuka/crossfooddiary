@@ -21,7 +21,9 @@ workflows:
           cat > Podfile <<'EOF'
           platform :ios, '10.0'
 
-          require File.expand_path('../.symlinks/flutter/dart_tools/bin/podhelper', __FILE__)
+
+          require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), File.dirname(File.realpath(__FILE__)))
+
 
           target 'Runner' do
           use_frameworks!
