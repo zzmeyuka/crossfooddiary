@@ -16,17 +16,18 @@ workflows:
         script: flutter clean
 
       - name: 🔧 Ensure CocoaPods and exclude x86_64
-  script: |
-    cd ios
+        script: |
+          cd ios
+          if [ ! -f Podfile ]; then
+            pod init
+          fi
 
-    # Создать Podfile, если его ещё нет
-    if [ ! -f Podfile ]; then
-      pod init
-    fi
+          # Создаём временный файл с содержимым Podfile без блока post_install
+          grep -v "post_install do |installer|" Podfile > Podfile.tmp || true
+          mv Podfile.tmp Podfile
 
-    # Добавить блок post_install, если его нет
-    if ! grep -q "post_install do |installer|" Podfile; then
-      cat <<EOT >> Podfile
+          # Добавляем нужный post_install в конец Podfile
+          cat <<EOF >> Podfile
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
@@ -35,12 +36,10 @@ post_install do |installer|
     end
   end
 end
-EOT
-    fi
+EOF
 
-    pod install
-    cd ..
-
+          pod install
+          cd ..
 
       - name: 🏗️ Build iOS app for Simulator
         script: flutter build ios --simulator --debug
