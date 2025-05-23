@@ -15,15 +15,34 @@ workflows:
       - name: 🧹 Clean previous builds
         script: flutter clean
 
-      - name: 🛠️ Install CocoaPods dependencies
+      - name: 🔧 Ensure CocoaPods and exclude x86_64
         script: |
           cd ios
+
+          # Создать Podfile, если его ещё нет
+          if [ ! -f Podfile ]; then
+            pod init
+          fi
+
+          # Добавить блок post_install, если его нет
+          if ! grep -q "post_install do |installer|" Podfile; then
+            cat <<EOT >> Podfile
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'x86_64'
+    end
+  end
+end
+EOT
+          fi
+
           pod install
           cd ..
 
       - name: 🏗️ Build iOS app for Simulator
-        script: |
-          flutter build ios --simulator --debug
+        script: flutter build ios --simulator --debug
 
       - name: 📁 Package Runner.app into .zip
         script: |
