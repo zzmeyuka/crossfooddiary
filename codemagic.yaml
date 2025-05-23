@@ -9,11 +9,13 @@ workflows:
       - name: 🔍 Check Flutter environment
         script: flutter doctor -v
 
+      - name: 🧹 Clean previous builds
+        script: flutter clean
+
       - name: 📦 Install dependencies
         script: flutter pub get
 
-      - name: 🧹 Clean previous builds
-        script: flutter clean
+     
 
       - name: 🔧 Create Podfile with flutter_ios_podfile_setup
         script: |
