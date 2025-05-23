@@ -15,8 +15,15 @@ workflows:
       - name: 🧹 Clean previous builds
         script: flutter clean
 
+      - name: 🛠️ Install CocoaPods dependencies
+        script: |
+          cd ios
+          pod install
+          cd ..
+
       - name: 🏗️ Build iOS app for Simulator
-        script: flutter build ios --simulator
+        script: |
+          flutter build ios --simulator --debug
 
       - name: 📁 Package Runner.app into .zip
         script: |
