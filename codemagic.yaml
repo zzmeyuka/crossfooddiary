@@ -15,31 +15,31 @@ workflows:
       - name: 🧹 Clean previous builds
         script: flutter clean
 
-      - name: 🔧 Ensure CocoaPods and exclude x86_64
-        script: |
-          cd ios
-          if [ ! -f Podfile ]; then
-            pod init
-          fi
+      - name: 🔧 Create Podfile with correct post_install
+  script: |
+    cd ios
+    cat <<EOF > Podfile
+platform :ios, '10.0'
 
-          # Создаём временный файл с содержимым Podfile без блока post_install
-          grep -v "post_install do |installer|" Podfile > Podfile.tmp || true
-          mv Podfile.tmp Podfile
+target 'Runner' do
+  use_frameworks!
+  use_modular_headers!
 
-          # Добавляем нужный post_install в конец Podfile
-          cat <<EOF >> Podfile
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 
-post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'x86_64'
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'x86_64'
+      end
     end
   end
 end
 EOF
 
-          pod install
-          cd ..
+    pod install
+    cd ..
+
 
       - name: 🏗️ Build iOS app for Simulator
         script: flutter build ios --simulator --debug
