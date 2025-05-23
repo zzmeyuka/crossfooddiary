@@ -16,9 +16,9 @@ workflows:
         script: flutter clean
 
       - name: 🔧 Create Podfile with correct post_install
-  script: |
-    cd ios
-    cat <<EOF > Podfile
+        script: |
+          cd ios
+          cat > Podfile <<'EOF'
 platform :ios, '10.0'
 
 target 'Runner' do
@@ -36,10 +36,8 @@ target 'Runner' do
   end
 end
 EOF
-
-    pod install
-    cd ..
-
+          pod install
+          cd ..
 
       - name: 🏗️ Build iOS app for Simulator
         script: flutter build ios --simulator --debug
