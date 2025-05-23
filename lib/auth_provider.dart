@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -40,6 +41,10 @@ class AuthProvider extends ChangeNotifier {
     _isGuest = false;
     final result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
     _user = result.user;
+    final box = Hive.box('local_data');
+    box.put('wasAuthenticated', true);       // метка, что вход был
+    box.put('pin_code', '1234');             // выбери свой PIN
+
 
     await _db.collection('users').doc(_user!.uid).set({
       'email': email,
@@ -145,5 +150,6 @@ class AuthProvider extends ChangeNotifier {
       debugPrint("Failed to update profile: $e");
     }
   }
+
 
 }

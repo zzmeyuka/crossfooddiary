@@ -4,8 +4,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import '../auth_provider.dart';
 import '../l10n/app_localizations.dart';
+import '../utils/network_helper.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -23,7 +28,89 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   void initState() {
     super.initState();
-    loadMeals();
+    _checkOfflineLogin(); // уже вызывает и checkConnection, и loadMeals
+  }
+  void _checkOfflineLogin() async {
+    final box = Hive.box('local_data');
+    final isOffline = await NetworkHelper.isOffline();
+    final wasAuthenticated = box.get('wasAuthenticated', defaultValue: false);
+
+    if (isOffline && wasAuthenticated) {
+      await _showPinLoginDialog();
+    } else {
+      checkConnection();
+      loadMeals();
+    }
+  }
+  Future<void> _showPinLoginDialog() async {
+    final box = Hive.box('local_data');
+    final savedPin = box.get('pin_code') ?? '0000';
+    final controller = TextEditingController();
+    bool isError = false;
+
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: const Text('Введите PIN'),
+              content: TextField(
+                controller: controller,
+                obscureText: true,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  labelText: 'PIN',
+                  errorText: isError ? 'Неверный PIN' : null,
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    if (controller.text == savedPin) {
+                      Navigator.of(context).pop();
+                      checkConnection();
+                      loadMeals();
+                    } else {
+                      setState(() => isError = true);
+                    }
+                  },
+                  child: const Text('Войти'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+
+  void checkConnection() async {
+    if (await NetworkHelper.isOffline()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Вы в офлайн-режиме")),
+      );
+
+      final box = Hive.box('local_data');
+      final savedMeals = box.get('mealsByDate');
+      if (savedMeals != null) {
+        setState(() {
+          mealsByDate = Map<String, List<Map<String, dynamic>>>.from(
+            savedMeals.map(
+                  (key, value) => MapEntry(
+                key,
+                List<Map<String, dynamic>>.from(
+                  value.map((e) => Map<String, dynamic>.from(e)),
+                ),
+              ),
+            ),
+          );
+          _loading = false;
+        });
+      }
+    }
   }
 
   Future<void> loadMeals() async {
@@ -53,6 +140,43 @@ class _CalendarScreenState extends State<CalendarScreen> {
       mealsByDate = loadedMeals;
       _loading = false;
     });
+
+    final box = Hive.box('local_data');
+    box.put('mealsByDate', loadedMeals);
+  }
+
+  void _syncMealsToFirebase() async {
+    final box = Hive.box('local_data');
+    final savedMeals = box.get('mealsByDate');
+    final auth = Provider.of<AuthProvider>(context, listen: false);
+
+    if (auth.user == null || auth.isGuest || savedMeals == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Невозможно синхронизировать")),
+      );
+      return;
+    }
+
+    final userRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.user!.uid)
+        .collection('meals');
+
+    final existing = await userRef.get();
+    for (var doc in existing.docs) {
+      await doc.reference.delete();
+    }
+
+    for (var date in savedMeals.keys) {
+      final meals = List<Map<String, dynamic>>.from(savedMeals[date]);
+      for (var meal in meals) {
+        await userRef.add({...meal, 'date': date});
+      }
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("\u2705 Синхронизировано с Firebase")),
+    );
   }
 
   Future<void> _addMeal() async {
@@ -230,6 +354,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
               if (picked != null) setState(() => selectedDate = picked);
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.sync),
+            onPressed: _syncMealsToFirebase,
+          ),
         ],
       ),
       body: Padding(
@@ -237,7 +365,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Hi, ${auth.userName} 👋", style: Theme.of(context).textTheme.headlineSmall),
+            Text("Hi, ${auth.userName} \u{1F44B}", style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 20),
             Center(
               child: CircularPercentIndicator(
@@ -275,9 +403,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await _addMeal();
-        },
+        onPressed: _addMeal,
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(t),
